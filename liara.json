@@ -1,0 +1,8 @@
+{
+  "app": "fastapi-app",
+  "port": 8001,
+  "build": {
+    "location": "germany"
+  },
+  "disks": []
+}
