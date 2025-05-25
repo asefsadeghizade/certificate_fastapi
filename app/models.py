@@ -71,7 +71,7 @@ class Certificate(Base):
             'issue_date': self.issue_date.isoformat(),
             'expiry_date': self.expiry_date.isoformat() if self.expiry_date else None,
             'unique_code': self.unique_code,
-            'created_at': self.created_at.isoformat() if self.created_at else None,
+            # 'created_at': self.created_at.isoformat() if self.created_at else None,
         }
         data_string = json.dumps(cert_data, sort_keys=True)
         data_bytes = data_string.encode('utf-8')
