@@ -2,8 +2,11 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-# Load the DATABASE_URL from the environment
-DATABASE_URL = os.environ.get("DATABASE_URL")
+# Default DATABASE_URL if not set in environment
+DEFAULT_DATABASE_URL = "postgresql://root:vkoCPvy3OSyZ9xE57sqF0mZU@certificate-db:5432/postgres"
+
+# Load the DATABASE_URL from the environment or use default
+DATABASE_URL = os.environ.get("DATABASE_URL", DEFAULT_DATABASE_URL)
 
 # Ensure it fails early if DATABASE_URL is not set
 if not DATABASE_URL:
