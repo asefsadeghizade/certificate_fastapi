@@ -7,8 +7,13 @@ from pydantic import BaseModel
 from datetime import date
 from typing import Optional
 
+from prometheus_fastapi_instrumentator import Instrumentator
+
 
 app = FastAPI()
+
+
+Instrumentator().instrument(app).expose(app)
 
 
 API_VERSION = "v1"
@@ -106,7 +111,7 @@ def get_certificate(unique_code: str, db: Session = Depends(get_db)):
     }
 
 
-@app.get(f"api/{API_VERSION}/")
+@app.get(f"api/{API_VERSION}")
 def read_root():
     return {"message": "Hello World"}
 
