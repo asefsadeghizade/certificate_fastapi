@@ -11,6 +11,9 @@ from typing import Optional
 app = FastAPI()
 
 
+API_VERSION = "v1"
+
+
 class ValidateRequest(BaseModel):
     unique_code: str
 
@@ -103,12 +106,12 @@ def get_certificate(unique_code: str, db: Session = Depends(get_db)):
     }
 
 
-@app.get("/")
+@app.get(f"api/{API_VERSION}/")
 def read_root():
     return {"message": "Hello World"}
 
 
-@app.get("/health")
+@app.get(f"/api/{API_VERSION}/health")
 def health_check():
     return {"status": "ok"}
 
@@ -163,7 +166,7 @@ def fix_signature(code: str, db: Session = Depends(get_db)):
 '''
 
 
-@app.get("/validate", response_model=ValidateResponse)
+@app.get(f"api/{API_VERSION}/validate", response_model=ValidateResponse)
 def validate_certificate(code: str = Query(..., alias="code"), db: Session = Depends(get_db)):
     cert = db.query(Certificate).filter(
         Certificate.unique_code == code).first()
